@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>The Midland Agg</title>
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <%= csrf_meta_tags %>
+</head>
+<body>
+	<header class="navbar navbar-default" role="navigation">
+    <div class="navbar-inner">
+      <div class="container">
+        <div id="logo" class="navbar-brand"><%= link_to "The Midland Agg", root_path %></div>
+        <nav class="collapse navbar-collapse navbar-ex1-collapse">
+        	<% if user_signed_in? -%>
+						<ul class="nav navbar-nav navbar-right">
+							<li><%= link_to 'Submit link', new_link_path %></li>
+							<li><%= link_to 'Account' %></li>
+							<li><%= link_to 'Sign out', destroy_user_session_path, :method => :delete %></li>
+						</ul>
+					<% else -%>
+						<ul class="nav navbar-nav pull-right">
+							<li><%= link_to 'Sign up', new_user_registration_path %></li>
+							<li><%= link_to 'Sign in', new_user_session_path %></li>
+						</ul>
+					<% end -%>
+        </nav>
+      </div>
+    </div>
+  </header>
+
+	<div id="main_content" class="container">
+		<% flash.each do |name, msg| %>
+			<%= content_tag(:div, msg, class: "alert alert-info") %>
+		<% end %>
+
+			<div id="content" class="col-md-9 center-block">
+
+
+
+<div id="sidebar">
+      <div id="logos">
+        <%= link_to root_path do %>
+          <%= image_tag "logo.svg" %>
+        <% end %>
+      </div>
+ 
+      <ul>
+        <li class="category">Website</li>
+        <li><%= link_to "Main", root_path %></li>
+        <li><%= link_to "About", about_path %></li>
+        <li><%= link_to "Usage", usage_path %></li>
+      </ul>
+ 
+      <ul>
+       <li class="category">Social</li>
+
+       <!--
+       <li><a href="https://twitter.com/mackenziechild">Twitter</a></li>
+       <li><a href="http://instagram.com/mackenziechild">Instagram</a></li>
+       <li><a href="https://github.com/mackenziechild">Github</a></li>
+     -->
+       <li><a href="mailto:noobtestnoob@outlook.com">Email</a></li>
+      </ul>
+ 
+      
+    </div>
+
+
+				
+				<%= yield %>
+			</div>
+		</div>
+	</div>
+</body>
+</html>
